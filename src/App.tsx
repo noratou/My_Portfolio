@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Mail, ShieldCheck, Database, Cpu, Code2, Globe, 
-  ChevronRight, ExternalLink, Lock, Layout, ChevronDown, Terminal, ArrowLeft, Zap
+  ChevronRight, ExternalLink, Lock, Layout, 
+  ChevronDown, Terminal, ArrowLeft, Zap,
+  Download
 } from 'lucide-react';
 
 // ==========================================
@@ -113,15 +115,18 @@ const projectsData = [
   },
   {
     id: 3,
-    title: "Cryptographic Protocol Implementations",
-    type: "Academic Coursework",
-    tags: ["C++", "Security"],
-    icon: <Lock size={24} />,
+    title: "TradeReady",
+    type: "SEA x OpenAI Hackathon",
+    tags: ["AI", "Compliance", "OpenAI"],
+    icon: <Globe size={24} />,
     color: "purple",
-    shortDesc: "Programmed robust C++ implementations of complex algorithms including RSA key generation, digital signatures, and hash functions.",
+    shortDesc:
+      "Co-designed an AI-powered compliance platform that automates cross-border trade requirement analysis across Southeast Asian markets.",
     demoDetails: {
-      metrics: "Core Challenge: Managing large integers and preventing overflow/underflow attacks when simulating modular exponentiation.",
-      architecture: "Implementation Details: Constructed raw implementations entirely from scratch without using OpenSSL. Focused heavily on memory management, byte-manipulation techniques, and optimized loop conditional boundaries to ensure mathematically sound keys and prevent basic side-channel data leakage."
+      metrics:
+        "Achievement: Selected as a Top 40 team among nearly 400 registered teams in the SEA x OpenAI Hackathon.",
+      architecture:
+        "Defined workflow architecture, regulatory data mapping, and compliance automation logic to streamline trade research and documentation generation."
     },
     link: null
   },
@@ -138,7 +143,21 @@ const projectsData = [
       architecture: "Implementation Details: Formulated aggressive regex-based payload cleaning and asynchronous error-handling middleware within Express/Node.js to handle API failures gracefully, maintaining data consistency inside NoSQL document schemas."
     },
     link: null
-  }
+  },
+  {
+    id: 5,
+    title: "Cryptographic Protocol Implementations",
+    type: "Academic Coursework",
+    tags: ["C++", "Security"],
+    icon: <Lock size={24} />,
+    color: "purple",
+    shortDesc: "Programmed robust C++ implementations of complex algorithms including RSA key generation, digital signatures, and hash functions.",
+    demoDetails: {
+      metrics: "Core Challenge: Managing large integers and preventing overflow/underflow attacks when simulating modular exponentiation.",
+      architecture: "Implementation Details: Constructed raw implementations entirely from scratch without using OpenSSL. Focused heavily on memory management, byte-manipulation techniques, and optimized loop conditional boundaries to ensure mathematically sound keys and prevent basic side-channel data leakage."
+    },
+    link: null
+  }  
 ];
 
 // ==========================================
@@ -184,9 +203,9 @@ function SandboxPage({ onBack }: SandboxPageProps) {
       case 'whoami':
         response = ["Nora Pan Ting-Yu | Computer Science Double Major", "Focusing on backend architecture, AI pipelines, systems data streams, and cryptography.", "Moved from a languages/arts background into core computer science through relentless technical adaptability."]; break;
       case 'ls':
-        response = ["Directories found:", "  - RingCT_EVoting_System.bin", "  - Ad_Traffic_Filter_Engine.cpp", "  - Crypto_Protocol_Suite.exe", "  - HackXperience_AI_Backend.node"]; break;
+        response = ["Directories found:", "  - TradeReady_AI_Compliance.app", "  - RingCT_EVoting_System.bin", "  - Ad_Traffic_Filter_Engine.cpp", "  - HackXperience_AI_Backend.node", "  - Crypto_Protocol_Suite.exe"]; break;
       case 'cat skills':
-        response = ["--- REPOSITORIES SKILL PACK ---", "Languages:      Python, C++, SQL, JavaScript, HTML", "Databases/BigD: MySQL, PostgreSQL, MongoDB, Hadoop, HDFS, Hive, HBase", "Tools/Concepts: Git, Docker, Cloud Deployment (Render), SDLC, Cryptography Frameworks"]; break;
+        response = ["--- REPOSITORIES SKILL PACK ---", "Languages:      Python, C++, SQL, JavaScript, HTML", "Data & AI: TensorFlow, Pandas, Scikit-learn", "Databases/BigD: MySQL, PostgreSQL, MongoDB, Hadoop, HDFS, Hive, HBase", "Tools/Concepts: Git, Docker, Cloud Deployment (Render), SDLC, Cryptography Frameworks, Figma, Taiga", "Focus Areas: AI Systems, Backend Development, Security, Product Analysis"]; break;
       case 'clear':
         setTerminalHistory([]); setTerminalInput(""); return;
       default:
@@ -298,7 +317,7 @@ function SandboxPage({ onBack }: SandboxPageProps) {
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'resume' | 'sandbox'>('resume');
   const titleEffect = useDecryptionEffect("Nora Pan", 30);
-  const headlineEffect = useDecryptionEffect("Backend & AI Software Engineer", 20);
+  const headlineEffect = useDecryptionEffect("AI • Backend • Product & Systems", 20);
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
@@ -344,7 +363,7 @@ export default function App() {
       <header className="max-w-6xl mx-auto px-6 pt-24 pb-20 text-center md:text-left md:flex gap-8 items-center">
         <div className="flex-1">
           <div className="inline-block px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/5 text-purple-400 text-xs font-bold mb-6 tracking-widest">
-            AVAILABLE NOV 2026
+            Available Nov 2026 • Singapore
           </div>
           <h1 className="text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight cursor-pointer select-none" onClick={titleEffect.trigger}>
             {titleEffect.text.split(" ")[0] || "Nora"} <span className="text-purple-500 italic">{titleEffect.text.split(" ")[1] || "Pan"}</span>
@@ -374,6 +393,79 @@ export default function App() {
         </div>
       </header>
 
+      <section className="max-w-6xl mx-auto px-6 mb-16">
+        <div className="bg-[#1a1025]/50 border border-purple-500/10 rounded-3xl p-8">
+
+          <div className="flex items-center gap-2 mb-6">
+            <Terminal size={18} className="text-purple-400" />
+            <h3 className="text-white font-bold text-lg">
+              Resume Vault
+            </h3>
+            <span className="text-xs text-purple-400 font-mono">
+              SELECT PROFILE
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+            {/* SWE */}
+            <a
+              href="/Nora_Pan_Ting_Yu_SWE_Resume.pdf"
+              target="_blank"
+              className="group bg-[#0f0715]/60 border border-white/5 p-5 rounded-2xl hover:border-indigo-500/50 transition-all hover:-translate-y-1"
+            >
+              <Cpu className="text-indigo-400 mb-4" />
+              <h4 className="text-white font-bold mb-2">
+                Software Engineer
+              </h4>
+              <p className="text-sm text-gray-500 mb-3">
+                Backend • AI • Infrastructure
+              </p>
+              <span className="text-xs text-indigo-400 font-mono">
+                DOWNLOAD PROFILE →
+              </span>
+            </a>
+
+            {/* PM */}
+            <a
+              href="/Nora_Pan_Ting_Yu_PM_Resume.pdf"
+              target="_blank"
+              className="group bg-[#0f0715]/60 border border-white/5 p-5 rounded-2xl hover:border-purple-500/50 transition-all hover:-translate-y-1"
+            >
+              <Layout className="text-purple-400 mb-4" />
+              <h4 className="text-white font-bold mb-2">
+                Product Manager
+              </h4>
+              <p className="text-sm text-gray-500 mb-3">
+                Product Strategy • PRD • UX
+              </p>
+              <span className="text-xs text-purple-400 font-mono">
+                DOWNLOAD PROFILE →
+              </span>
+            </a>
+
+            {/* BA */}
+            <a
+              href="/Nora_Pan_Ting_Yu_BA_Resume.pdf"
+              target="_blank"
+              className="group bg-[#0f0715]/60 border border-white/5 p-5 rounded-2xl hover:border-green-500/50 transition-all hover:-translate-y-1"
+            >
+              <Database className="text-green-400 mb-4" />
+              <h4 className="text-white font-bold mb-2">
+                Business Analyst
+              </h4>
+              <p className="text-sm text-gray-500 mb-3">
+                Analysis • Consulting • Process
+              </p>
+              <span className="text-xs text-green-400 font-mono">
+                DOWNLOAD PROFILE →
+              </span>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
       {/* Stats/Highlight */}
       <section id="about" className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
         <div className="bg-[#1a1025]/50 border border-purple-500/10 p-6 rounded-2xl text-center md:text-left">
@@ -388,8 +480,8 @@ export default function App() {
         </div>
         <div className="bg-[#1a1025]/50 border border-purple-500/10 p-6 rounded-2xl text-center md:text-left">
           <Code2 className="text-purple-500 mb-4 mx-auto md:mx-0" />
-          <h3 className="text-white font-bold mb-1">Engineering Focus</h3>
-          <p className="text-sm text-gray-500">Traffic Filtering & Data Protection</p>
+          <h3 className="text-white font-bold mb-1">Career Tracks</h3>
+          <p className="text-sm text-gray-500">Engineering • Product • Consulting • Security</p>
         </div>
       </section>
 
@@ -397,10 +489,14 @@ export default function App() {
       <section className="max-w-6xl mx-auto px-6 mb-24">
         <div className="p-8 bg-purple-900/10 border border-purple-500/20 rounded-3xl">
           <p className="text-lg text-gray-300 leading-relaxed font-light mb-4">
-            Coming from a <span className="text-purple-400 font-medium">pure languages and arts background</span>, I made a conscious decision to move to Singapore and pursue Computer Science to challenge my analytical boundaries and dive into computational logic.
+            Coming from a <span className="text-purple-400 font-medium">languages and arts background</span>,
+            I made a conscious decision to move to Singapore and pursue Computer Science to challenge my analytical thinking and explore technology from a completely different perspective.
           </p>
+
           <p className="text-lg text-gray-300 leading-relaxed font-light">
-            Today, I am a Computer Science student specializing in <span className="text-white font-medium">Backend & AI Software Engineering</span>. I am deeply passionate about deploying intelligent data pipelines and applying robust C++ and Python algorithms to solve complex traffic filtering, risk control, and cryptographic data protection challenges.
+            Today, I am a Computer Science student specializing in
+            <span className="text-white font-medium"> Artificial Intelligence, Big Data, and Digital Systems Security</span>.
+            Through hackathons, academic projects, and leadership experiences, I enjoy building practical solutions that combine software engineering, data-driven decision making, and user-focused problem solving.
           </p>
         </div>
       </section>
