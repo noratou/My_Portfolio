@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Mail, ShieldCheck, Database, Cpu, Code2, Globe, 
   ChevronRight, ExternalLink, Lock, Layout, 
-  ChevronDown, Terminal, ArrowLeft, Zap,
-  Download
+  ChevronDown, Terminal, ArrowLeft, Zap
 } from 'lucide-react';
 
 // ==========================================
