@@ -313,11 +313,202 @@ function SandboxPage({ onBack }: SandboxPageProps) {
   );
 }
 
+interface ContactPageProps {
+  onBack: () => void;
+}
+
+function ContactPage({ onBack }: ContactPageProps) {
+  const [status, setStatus] = useState<
+    'idle' | 'submitting' | 'success' | 'error'
+  >('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('submitting');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const encodedData = new URLSearchParams();
+
+    formData.forEach((value, key) => {
+      encodedData.append(key, value.toString());
+    });
+
+    try {
+      const response = await fetch('/__forms.html', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: encodedData.toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
+
+      form.reset();
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-12 animate-fadeIn">
+      <button
+        onClick={onBack}
+        className="flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 font-mono mb-10 group transition-colors"
+      >
+        <ArrowLeft
+          size={16}
+          className="group-hover:-translate-x-1 transition-transform"
+        />
+        BACK TO PORTFOLIO HOME
+      </button>
+
+      <div className="mb-10">
+        <p className="text-purple-400 text-xs font-mono font-bold tracking-widest mb-3">
+          CONTACT_NODE
+        </p>
+
+        <h2 className="text-4xl font-extrabold text-white mb-3">
+          Get in Touch
+        </h2>
+
+        <p className="text-gray-400 leading-relaxed">
+          Have a question, opportunity, or project in mind? Send me a message
+          and I’ll get back to you as soon as possible.
+        </p>
+      </div>
+
+      <form
+        name="portfolio-contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+        className="bg-[#160e1d] border border-purple-500/20 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl"
+      >
+        <input
+          type="hidden"
+          name="form-name"
+          value="portfolio-contact"
+        />
+
+        <p className="hidden">
+          <label>
+            Do not fill this out:
+            <input name="bot-field" />
+          </label>
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Name
+            </label>
+
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Your name"
+              className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white placeholder:text-gray-600 outline-none transition-colors focus:border-purple-500"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
+              Email
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder="your@email.com"
+              className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white placeholder:text-gray-600 outline-none transition-colors focus:border-purple-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label
+            htmlFor="subject"
+            className="block text-sm font-medium text-gray-300 mb-2"
+          >
+            Subject
+          </label>
+
+          <input
+            id="subject"
+            name="subject"
+            type="text"
+            required
+            placeholder="What would you like to discuss?"
+            className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white placeholder:text-gray-600 outline-none transition-colors focus:border-purple-500"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium text-gray-300 mb-2"
+          >
+            Message
+          </label>
+
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows={7}
+            placeholder="Write your message here..."
+            className="w-full resize-y rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white placeholder:text-gray-600 outline-none transition-colors focus:border-purple-500"
+          />
+        </div>
+
+        {status === 'success' && (
+          <div className="rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-400">
+            Message sent successfully. Thank you!
+          </div>
+        )}
+
+        {status === 'error' && (
+          <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+            The message could not be sent. Please try again.
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={status === 'submitting'}
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-6 py-3 font-bold text-white shadow-lg shadow-purple-500/20 transition-all hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          <Mail size={18} />
+          {status === 'submitting' ? 'Sending...' : 'Send Message'}
+        </button>
+      </form>
+    </div>
+  );
+}
+
 // ==========================================
 // 4. MAIN CORE PORTFOLIO COMPONENT
 // ==========================================
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'sandbox'>('home');
+  const [currentPage, setCurrentPage] = useState<
+    'home' | 'sandbox' | 'contact'
+  >('home');
   const titleEffect = useDecryptionEffect("Nora Pan Ting-Yu", 30);
   const headlineEffect = useDecryptionEffect("AI • Backend • Product & Systems", 20);
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -328,6 +519,14 @@ export default function App() {
     return (
       <div className="min-h-screen bg-[#0f0715] text-gray-200 font-sans selection:bg-purple-500/30">
         <SandboxPage onBack={() => setCurrentPage('home')} />
+      </div>
+    );
+  }
+
+  if (currentPage === 'contact') {
+    return (
+      <div className="min-h-screen bg-[#0f0715] text-gray-200 font-sans selection:bg-purple-500/30">
+        <ContactPage onBack={() => setCurrentPage('home')} />
       </div>
     );
   }
@@ -380,9 +579,14 @@ export default function App() {
             {headlineEffect.text || "Backend & AI Software Engineer"}
           </p>
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <a href="mailto:p.nora25n@gmail.com" className="flex items-center gap-2 px-8 py-3 bg-purple-600 text-white font-bold rounded-full hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/20">
-              <Mail size={18} /> Contact Me
-            </a>
+            <button
+              type="button"
+              onClick={() => setCurrentPage('contact')}
+              className="flex items-center gap-2 px-8 py-3 bg-purple-600 text-white font-bold rounded-full hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/20"
+            >
+              <Mail size={18} />
+              Contact Me
+            </button>
             <button onClick={() => setCurrentPage('sandbox')} className="xl:hidden px-8 py-3 bg-white/5 border border-white/10 text-gray-300 font-bold rounded-full hover:bg-white/10 transition-all font-mono text-sm">
               Launch Sandbox Mode
             </button>
