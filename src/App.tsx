@@ -300,7 +300,7 @@ function SandboxPage({ onBack }: SandboxPageProps) {
 
           {Object.keys(decryptedProjects).length === projectsData.length && (
             <div className="mt-4 p-2 bg-purple-500/10 border border-purple-500/30 rounded-xl text-center text-[10px] font-mono text-purple-300 animate-fadeIn">
-              🎉 [SUCCESS] ALL PACKETS AUDITED. FULL ACCESS GRANTED TO NORA'S RESUME METRICS.
+              🎉 [SUCCESS] ALL PACKETS AUDITED. FULL ACCESS GRANTED TO NORA'S PROJECT METRICS.
             </div>
           )}
         </div>
@@ -391,79 +391,6 @@ export default function App() {
            </div>
         </div>
       </header>
-
-      <section className="max-w-6xl mx-auto px-6 mb-16">
-        <div className="bg-[#1a1025]/50 border border-purple-500/10 rounded-3xl p-8">
-
-          <div className="flex items-center gap-2 mb-6">
-            <Terminal size={18} className="text-purple-400" />
-            <h3 className="text-white font-bold text-lg">
-              Resume Vault
-            </h3>
-            <span className="text-xs text-purple-400 font-mono">
-              SELECT PROFILE
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-            {/* SWE */}
-            <a
-              href="/Nora_Pan_Ting_Yu_SWE_Resume.pdf"
-              target="_blank"
-              className="group bg-[#0f0715]/60 border border-white/5 p-5 rounded-2xl hover:border-indigo-500/50 transition-all hover:-translate-y-1"
-            >
-              <Cpu className="text-indigo-400 mb-4" />
-              <h4 className="text-white font-bold mb-2">
-                Software Engineer
-              </h4>
-              <p className="text-sm text-gray-500 mb-3">
-                Backend • AI • Infrastructure
-              </p>
-              <span className="text-xs text-indigo-400 font-mono">
-                DOWNLOAD PROFILE →
-              </span>
-            </a>
-
-            {/* PM */}
-            <a
-              href="/Nora_Pan_Ting_Yu_PM_Resume.pdf"
-              target="_blank"
-              className="group bg-[#0f0715]/60 border border-white/5 p-5 rounded-2xl hover:border-purple-500/50 transition-all hover:-translate-y-1"
-            >
-              <Layout className="text-purple-400 mb-4" />
-              <h4 className="text-white font-bold mb-2">
-                Product Manager
-              </h4>
-              <p className="text-sm text-gray-500 mb-3">
-                Product Strategy • PRD • UX
-              </p>
-              <span className="text-xs text-purple-400 font-mono">
-                DOWNLOAD PROFILE →
-              </span>
-            </a>
-
-            {/* BA */}
-            <a
-              href="/Nora_Pan_Ting_Yu_BA_Resume.pdf"
-              target="_blank"
-              className="group bg-[#0f0715]/60 border border-white/5 p-5 rounded-2xl hover:border-green-500/50 transition-all hover:-translate-y-1"
-            >
-              <Database className="text-green-400 mb-4" />
-              <h4 className="text-white font-bold mb-2">
-                Business Analyst
-              </h4>
-              <p className="text-sm text-gray-500 mb-3">
-                Analysis • Consulting • Process
-              </p>
-              <span className="text-xs text-green-400 font-mono">
-                DOWNLOAD PROFILE →
-              </span>
-            </a>
-
-          </div>
-        </div>
-      </section>
 
       {/* Stats/Highlight */}
       <section id="about" className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
