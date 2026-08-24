@@ -5,7 +5,8 @@ import {
   ChevronDown, Terminal, ArrowLeft, Zap
 } from 'lucide-react';
 
-// import ringVoteLogo from './assets/ringvote-logo.png';
+import ringVoteLogo from './assets/ringvote_logo.png';
+import ringVoteQr from './assets/qrcode_ringvote.png';
 
 // ==========================================
 // 1. CUSTOM HOOK: CRYPTO DECRYPTION EFFECT
@@ -88,15 +89,15 @@ function TiltCard({ children, onClick, className, color }: TiltCardProps) {
 const projectsData = [
   {
     id: 1,
-    title: "RingVote - RingCT E-Voting System",
+    title: "RingVote — Privacy-Preserving E-Voting",
     type: "Final Year Project",
-    tags: ["Cryptography", "Blockchain"],
+    tags: ["Cryptography", "React", "FastAPI"],
     icon: <ShieldCheck size={24} />,
     color: "purple",
-    shortDesc: "Architecting a secure e-voting platform utilising RingCT to guarantee anonymous and verifiable voting.",
+    shortDesc: "Built a privacy-preserving e-voting platform using linkable ring signatures, confidential ballots, and publicly verifiable proof receipts.",
     demoDetails: {
-      metrics: "Core Challenge: Implementing ring confidential transactions without bloated signature sizes that slow down verification chains.",
-      architecture: "Implementation Details: Built directly upon modular mathematical frameworks inspired by Willy's fail-stop signature concepts. Focused on structuring verifiable range proofs and handling ring public-key decoy matrices in C++ to block identity linkage tracking."
+      metrics: "Core Challenge: Preserving voter anonymity while preventing double voting and keeping ballot evidence independently verifiable.",
+      architecture: "Implementation Details: The React and TypeScript client protects voter keys and constructs LSAG-style authorisation and confidential ballot data locally. The FastAPI backend verifies signatures and election-scoped key images, rejects duplicate votes, and records append-only audit evidence without storing voter PII."
     },
     link: "https://github.com/mx1204/ringvote"
   },
@@ -204,7 +205,7 @@ function SandboxPage({ onBack }: SandboxPageProps) {
       case 'whoami':
         response = ["Nora Pan Ting-Yu | Computer Science Double Major", "Focusing on backend architecture, AI pipelines, systems data streams, and cryptography.", "Moved from a languages/arts background into core computer science through relentless technical adaptability."]; break;
       case 'ls':
-        response = ["Directories found:", "  - TradeReady_AI_Compliance.app", "  - RingCT_EVoting_System.bin", "  - Ad_Traffic_Filter_Engine.cpp", "  - HackXperience_AI_Backend.node", "  - Crypto_Protocol_Suite.exe"]; break;
+        response = ["Directories found:", "  - TradeReady_AI_Compliance.app", "  - RingVote_EVoting_System.bin", "  - Ad_Traffic_Filter_Engine.cpp", "  - HackXperience_AI_Backend.node", "  - Crypto_Protocol_Suite.exe"]; break;
       case 'cat skills':
         response = ["--- REPOSITORIES SKILL PACK ---", "Languages:      Python, C++, SQL, JavaScript, HTML", "Data & AI: TensorFlow, Pandas, Scikit-learn", "Databases/BigD: MySQL, PostgreSQL, MongoDB, Hadoop, HDFS, Hive, HBase", "Tools/Concepts: Git, Docker, Cloud Deployment (Render), SDLC, Cryptography Frameworks, Figma, Taiga", "Focus Areas: AI Systems, Backend Development, Security, Product Analysis"]; break;
       case 'clear':
@@ -316,7 +317,7 @@ function SandboxPage({ onBack }: SandboxPageProps) {
 // 4. MAIN CORE PORTFOLIO COMPONENT
 // ==========================================
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'resume' | 'sandbox'>('resume');
+  const [currentPage, setCurrentPage] = useState<'home' | 'sandbox'>('home');
   const titleEffect = useDecryptionEffect("Nora Pan Ting-Yu", 30);
   const headlineEffect = useDecryptionEffect("AI • Backend • Product & Systems", 20);
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -326,7 +327,7 @@ export default function App() {
   if (currentPage === 'sandbox') {
     return (
       <div className="min-h-screen bg-[#0f0715] text-gray-200 font-sans selection:bg-purple-500/30">
-        <SandboxPage onBack={() => setCurrentPage('resume')} />
+        <SandboxPage onBack={() => setCurrentPage('home')} />
       </div>
     );
   }
@@ -342,7 +343,7 @@ export default function App() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 backdrop-blur-md border-b border-purple-500/10 bg-[#0f0715]/80">
         <div className="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-          <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent cursor-pointer" onClick={() => setCurrentPage('resume')}>
+          <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent cursor-pointer" onClick={() => setCurrentPage('home')}>
             NORA.PAN
           </span>
           <div className="hidden md:flex space-x-8 text-sm font-medium items-center">
@@ -366,8 +367,14 @@ export default function App() {
           <div className="inline-block px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/5 text-purple-400 text-xs font-bold mb-6 tracking-widest">
             Available Nov 2026 • Singapore
           </div>
-          <h1 className="text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight cursor-pointer select-none" onClick={titleEffect.trigger}>
-            {titleEffect.text.split(" ")[0] || "Nora"} <span className="text-purple-500 italic">{titleEffect.text.split(" ")[1] || "Pan Ting-Yu"}</span>
+          <h1
+            className="text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight cursor-pointer select-none"
+            onClick={titleEffect.trigger}
+          >
+            {titleEffect.text.split(" ")[0] || "Nora"}{" "}
+            <span className="text-purple-500 italic">
+              {titleEffect.text.split(" ").slice(1).join(" ") || "Pan Ting-Yu"}
+            </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed mb-8 cursor-pointer select-none" onClick={headlineEffect.trigger}>
             {headlineEffect.text || "Backend & AI Software Engineer"}
@@ -442,6 +449,16 @@ export default function App() {
           {projectsData.map((project) => (
             <TiltCard key={project.id} color={project.color} className={`bg-[#160e1d] border ${expandedId === project.id ? `border-${project.color}-500/80` : 'border-white/5'} p-8 rounded-3xl flex flex-col justify-between cursor-pointer select-none`} onClick={() => setExpandedId(expandedId === project.id ? null : project.id)}>
               <div>
+                {project.id === 1 && (
+                  <div className="relative h-24 mb-6 overflow-hidden rounded-2xl bg-white/95 border border-white/10">
+                    <img
+                      src={ringVoteLogo}
+                      alt="RingVote logo"
+                      className="absolute left-1/2 top-1/2 w-[150%] max-w-none -translate-x-1/2 -translate-y-1/2"
+                    />
+                  </div>
+                )}
+
                 <div className="flex justify-between mb-6 items-center">
                   <div className={`p-3 bg-${project.color}-500/10 rounded-xl text-${project.color}-400`}>
                     {project.icon}
@@ -458,12 +475,27 @@ export default function App() {
                 <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-6">{project.shortDesc}</p>
                 
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${expandedId === project.id ? 'max-h-96 opacity-100 mb-6' : 'max-h-0 opacity-0'}`}>
+                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${expandedId === project.id ? 'max-h-[48rem] opacity-100 mb-6' : 'max-h-0 opacity-0'}`}>
                    <div className="p-4 bg-black/40 rounded-xl border border-white/5 space-y-3">
                      <div>
                        <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mb-1">Project Summary Focus</p>
                        <p className="text-sm text-gray-300">{project.demoDetails.metrics}</p>
                      </div>
+                     {project.id === 1 && (
+                        <div className="pt-3 border-t border-white/5">
+                          <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mb-3 text-center">
+                            Scan to explore RingVote
+                          </p>
+
+                          <div className="w-44 mx-auto rounded-2xl bg-white p-3 shadow-lg">
+                            <img
+                              src={ringVoteQr}
+                              alt="QR code for RingVote"
+                              className="block w-full h-auto"
+                            />
+                          </div>
+                        </div>
+                      )}
                      <div>
                        <p className="text-[10px] text-indigo-400 font-bold uppercase tracking-wider mb-1">Technical Flow</p>
                        <p className="text-sm text-gray-300">{project.demoDetails.architecture}</p>
@@ -573,7 +605,7 @@ export default function App() {
                   <ChevronRight size={14} className="text-indigo-600" /> Git / Docker
                 </li>
                 <li className="flex items-center gap-2 py-1 border-b border-white/5">
-                  <ChevronRight size={14} className="text-indigo-600" /> Cryptography / Blockchain
+                  <ChevronRight size={14} className="text-indigo-600" /> Cryptography / Secure Systems
                 </li>
                 <li className="flex items-center gap-2 py-1 border-b border-white/5">
                   <ChevronRight size={14} className="text-indigo-600" /> OOP / JSON / BSON / APIs
