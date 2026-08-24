@@ -315,7 +315,7 @@ function SandboxPage({ onBack }: SandboxPageProps) {
 // ==========================================
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'resume' | 'sandbox'>('resume');
-  const titleEffect = useDecryptionEffect("Nora Pan", 30);
+  const titleEffect = useDecryptionEffect("Nora Pan Ting-Yu", 30);
   const headlineEffect = useDecryptionEffect("AI • Backend • Product & Systems", 20);
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
