@@ -450,11 +450,11 @@ export default function App() {
             <TiltCard key={project.id} color={project.color} className={`bg-[#160e1d] border ${expandedId === project.id ? `border-${project.color}-500/80` : 'border-white/5'} p-8 rounded-3xl flex flex-col justify-between cursor-pointer select-none`} onClick={() => setExpandedId(expandedId === project.id ? null : project.id)}>
               <div>
                 {project.id === 1 && (
-                  <div className="relative h-24 mb-6 overflow-hidden rounded-2xl bg-white/95 border border-white/10">
+                  <div className="relative h-32 mb-6 overflow-hidden rounded-2xl bg-white/95 border border-white/10">
                     <img
                       src={ringVoteLogo}
                       alt="RingVote logo"
-                      className="absolute left-1/2 top-1/2 w-[150%] max-w-none -translate-x-1/2 -translate-y-1/2"
+                      className="absolute left-[52%] top-[63%] w-[115%] max-w-none -translate-x-1/2 -translate-y-1/2"
                     />
                   </div>
                 )}
