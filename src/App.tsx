@@ -346,11 +346,11 @@ export default function App() {
           <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent cursor-pointer" onClick={() => setCurrentPage('home')}>
             NORA.PAN
           </span>
-          <div className="hidden md:flex space-x-8 text-sm font-medium items-center">
+          <div className="hidden lg:flex gap-6 text-sm font-medium items-center">
             <a href="#about" className="hover:text-purple-400 transition-colors">About</a>
             <a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a>
             <a href="#skills" className="hover:text-purple-400 transition-colors">Skills</a>
-            <button onClick={() => setCurrentPage('sandbox')} className="px-3 py-1 bg-purple-600/20 border border-purple-500/40 rounded-lg text-xs font-mono text-purple-400 hover:bg-purple-600 hover:text-white transition-all animate-pulse">
+            <button onClick={() => setCurrentPage('sandbox')} className="hidden xl:inline-flex px-3 py-1 bg-purple-600/20 border border-purple-500/40 rounded-lg text-xs font-mono text-purple-400 hover:bg-purple-600 hover:text-white transition-all animate-pulse">
               [ RUN SANDBOX ]
             </button>
           </div>
@@ -362,35 +362,35 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <header className="max-w-6xl mx-auto px-6 pt-24 pb-20 text-center md:text-left md:flex gap-8 items-center">
-        <div className="flex-1">
+      <header className="max-w-6xl mx-auto px-6 pt-16 lg:pt-20 pb-16 text-center lg:text-left xl:flex gap-12 items-center">
+        <div className="flex-1 min-w-0">
           <div className="inline-block px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/5 text-purple-400 text-xs font-bold mb-6 tracking-widest">
             Available Nov 2026 • Singapore
           </div>
           <h1
-            className="text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight cursor-pointer select-none"
+            className="text-5xl sm:text-6xl xl:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.05] cursor-pointer select-none"
             onClick={titleEffect.trigger}
           >
             {titleEffect.text.split(" ")[0] || "Nora"}{" "}
-            <span className="text-purple-500 italic">
+            <span className="inline-block whitespace-nowrap text-purple-500 italic">
               {titleEffect.text.split(" ").slice(1).join(" ") || "Pan Ting-Yu"}
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed mb-8 cursor-pointer select-none" onClick={headlineEffect.trigger}>
             {headlineEffect.text || "Backend & AI Software Engineer"}
           </p>
-          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+          <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
             <a href="mailto:p.nora25n@gmail.com" className="flex items-center gap-2 px-8 py-3 bg-purple-600 text-white font-bold rounded-full hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/20">
               <Mail size={18} /> Contact Me
             </a>
-            <button onClick={() => setCurrentPage('sandbox')} className="md:hidden px-8 py-3 bg-white/5 border border-white/10 text-gray-300 font-bold rounded-full hover:bg-white/10 transition-all font-mono text-sm">
+            <button onClick={() => setCurrentPage('sandbox')} className="xl:hidden px-8 py-3 bg-white/5 border border-white/10 text-gray-300 font-bold rounded-full hover:bg-white/10 transition-all font-mono text-sm">
               Launch Sandbox Mode
             </button>
           </div>
         </div>
 
         {/* SHIELD INTRUSION NODE */}
-        <div className="flex-1 hidden md:flex justify-end">
+        <div className="flex-1 hidden xl:flex justify-end">
            <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
               <div className="relative px-12 py-12 bg-[#1a1025] rounded-2xl border border-white/5 flex items-center justify-center cursor-pointer" onClick={() => setCurrentPage('sandbox')}>
