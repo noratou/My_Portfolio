@@ -451,7 +451,7 @@ function ContactPage({ onBack }: ContactPageProps) {
 
           <input
             id="subject"
-            name="inquiry-subject"
+            name="subject"
             type="text"
             required
             placeholder="What would you like to discuss?"
