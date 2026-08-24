@@ -5,6 +5,8 @@ import {
   ChevronDown, Terminal, ArrowLeft, Zap
 } from 'lucide-react';
 
+// import ringVoteLogo from './assets/ringvote-logo.png';
+
 // ==========================================
 // 1. CUSTOM HOOK: CRYPTO DECRYPTION EFFECT
 // ==========================================
@@ -86,7 +88,7 @@ function TiltCard({ children, onClick, className, color }: TiltCardProps) {
 const projectsData = [
   {
     id: 1,
-    title: "RingCT E-Voting System",
+    title: "RingVote - RingCT E-Voting System",
     type: "Final Year Project",
     tags: ["Cryptography", "Blockchain"],
     icon: <ShieldCheck size={24} />,
@@ -96,7 +98,7 @@ const projectsData = [
       metrics: "Core Challenge: Implementing ring confidential transactions without bloated signature sizes that slow down verification chains.",
       architecture: "Implementation Details: Built directly upon modular mathematical frameworks inspired by Willy's fail-stop signature concepts. Focused on structuring verifiable range proofs and handling ring public-key decoy matrices in C++ to block identity linkage tracking."
     },
-    link: null
+    link: "https://github.com/mx1204/ringvote"
   },
   {
     id: 2,
@@ -365,7 +367,7 @@ export default function App() {
             Available Nov 2026 • Singapore
           </div>
           <h1 className="text-6xl md:text-7xl font-extrabold text-white mb-6 tracking-tight cursor-pointer select-none" onClick={titleEffect.trigger}>
-            {titleEffect.text.split(" ")[0] || "Nora"} <span className="text-purple-500 italic">{titleEffect.text.split(" ")[1] || "Pan"}</span>
+            {titleEffect.text.split(" ")[0] || "Nora"} <span className="text-purple-500 italic">{titleEffect.text.split(" ")[1] || "Pan Ting-Yu"}</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed mb-8 cursor-pointer select-none" onClick={headlineEffect.trigger}>
             {headlineEffect.text || "Backend & AI Software Engineer"}
